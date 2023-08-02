@@ -11,7 +11,7 @@ class StoreTarefaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreTarefaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'data' => 'required|date',
+            'assunto' => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'realizado' => 'required|boolean',
+            'tipo_id' => 'required|integer|exists:tipos,id', // Verifica se o tipo_id existe na tabela tipos
         ];
     }
 }
