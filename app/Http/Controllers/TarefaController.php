@@ -13,7 +13,9 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        //
+        // Retorna todas as tarefas em formato JSON
+        $tarefas = Tarefa::all();
+        return response()->json($tarefas);
     }
 
     /**
@@ -29,15 +31,25 @@ class TarefaController extends Controller
      */
     public function store(StoreTarefaRequest $request)
     {
-        //
+         // Cria uma nova tarefa com os dados recebidos
+         $tarefa = Tarefa::create($request->all());
+
+         return response()->json($tarefa, 201);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Tarefa $tarefa)
+    public function show($id)
     {
-        //
+        // Encontra uma tarefa pelo ID e retorna em formato JSON
+        $tarefa = Tarefa::find($id);
+
+        if (!$tarefa) {
+            return response()->json(['message' => 'Tarefa não encontrada'], 404);
+        }
+
+        return response()->json($tarefa);
     }
 
     /**
@@ -51,16 +63,36 @@ class TarefaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateTarefaRequest $request, Tarefa $tarefa)
+    public function update(UpdateTarefaRequest $request, $id)
     {
-        //
+        // Encontra a tarefa pelo ID
+        $tarefa = Tarefa::find($id);
+
+        if (!$tarefa) {
+            return response()->json(['message' => 'Tarefa não encontrada'], 404);
+        }
+
+        // Atualiza os dados da tarefa
+        $tarefa->update($request->all());
+
+        return response()->json($tarefa);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Tarefa $tarefa)
+    public function destroy($id)
     {
-        //
+       // Encontra a tarefa pelo ID
+       $tarefa = Tarefa::find($id);
+
+       if (!$tarefa) {
+           return response()->json(['message' => 'Tarefa não encontrada'], 404);
+       }
+
+       // Deleta a tarefa
+       $tarefa->delete();
+
+       return response()->json(['message' => 'Tarefa deletada com sucesso'], 200);
     }
 }

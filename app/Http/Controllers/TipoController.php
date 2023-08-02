@@ -49,7 +49,6 @@ class TipoController extends Controller
         if (!$tipo) {
             return response()->json(['message' => 'Tipo não encontrado'], 404);
         }
-
         return response()->json($tipo);
     }
 
