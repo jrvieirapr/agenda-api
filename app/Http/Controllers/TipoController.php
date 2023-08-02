@@ -93,6 +93,6 @@ class TipoController extends Controller
         // Deleta a Tipo
         $tipo->delete();
 
-        return response()->json(['message' => 'Tipo deletada com sucesso'], 200);
+        return response()->json(['message' => 'Tipo deletado com sucesso'], 200);
     }
 }
