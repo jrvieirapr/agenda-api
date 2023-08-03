@@ -1,0 +1,26 @@
+GET http://localhost:8000/api/tipos HTTP/1.1
+content-type: application/json
+
+###
+POST http://localhost:8000/api/tipos HTTP/1.1
+content-type: application/json
+
+{
+    "descricao": "Arquivado"
+}
+
+###
+GET http://localhost:8000/api/tipos/6 HTTP/1.1
+content-type: application/json
+
+###
+PUT  http://localhost:8000/api/tipos/3 HTTP/1.1
+content-type: application/json
+
+{
+    "descricao": "FINALIZADO"
+}
+
+###
+DELETE  http://localhost:8000/api/tipos/3 HTTP/1.1
+content-type: application/json

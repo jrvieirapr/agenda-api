@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('tarefas', function (Blueprint $table) {
             $table->id();
+            $table->date('data');
+            $table->string("assunto");
+            $table->string("descricao");
+            $table->boolean("realizado");
+            $table->unsignedBigInteger('tipo_id');
+            $table->foreign('tipo_id')->references('id')->on('tipos');
             $table->timestamps();
         });
     }

@@ -21,6 +21,7 @@ class UpdateTarefaRequest extends FormRequest
      */
     public function rules(): array
     {
+
         return [
             'data' => 'required|date',
             'assunto' => 'required|string|max:255',

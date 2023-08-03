@@ -11,7 +11,7 @@ class UpdateTipoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,9 @@ class UpdateTipoRequest extends FormRequest
      */
     public function rules(): array
     {
+        $id = $this->segment(3);
         return [
-            'descricao' => 'required|min:2|max:50|unique:tipos,descricao,'.$this->tipo->id            
+            'descricao' => 'required|min:2 |max:50|unique:tipos,descricao,' . $id,
         ];
     }
 }
