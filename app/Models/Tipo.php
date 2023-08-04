@@ -10,4 +10,9 @@ class Tipo extends Model
     use HasFactory;
 
     protected $fillable = ['descricao'];
+
+    public function tarefas()
+    {
+        return $this->hasMany(Tarefa::class);
+    }
 }

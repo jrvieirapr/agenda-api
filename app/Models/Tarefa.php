@@ -10,4 +10,10 @@ class Tarefa extends Model
     use HasFactory;
 
     protected $fillable = ['data','assunto','descricao','realizado','tipo_id',];
+
+    public function tipo()
+    {
+        return $this->belongsTo(Tipo::class,
+         "tipo_id");
+    }
 }

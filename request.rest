@@ -22,7 +22,7 @@ content-type: application/json
 }
 
 ###
-DELETE  http://localhost:8000/api/tipos/7 HTTP/1.1
+DELETE  http://localhost:8000/api/tipos/4 HTTP/1.1
 content-type: application/json
 
 

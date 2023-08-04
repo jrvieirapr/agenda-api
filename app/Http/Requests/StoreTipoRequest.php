@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreTipoRequest extends FormRequest
 {
@@ -24,5 +26,13 @@ class StoreTipoRequest extends FormRequest
         return [
             'descricao'=> 'required|min:2|max:50|unique:tipos,descricao'            
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'Erro de validação',
+            'errors' => $validator->errors(),
+        ], 422));
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class StoreTarefaRequest extends FormRequest
 {
@@ -28,5 +30,13 @@ class StoreTarefaRequest extends FormRequest
             'realizado' => 'required|boolean',
             'tipo_id' => 'required|integer|exists:tipos,id', // Verifica se o tipo_id existe na tabela tipos
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => 'Erro de validação',
+            'errors' => $validator->errors(),
+        ], 422));
     }
 }

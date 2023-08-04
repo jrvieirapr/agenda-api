@@ -67,11 +67,17 @@ class TipoController extends Controller
      */
     public function destroy($id)
     {
+
         // Encontra a Tipo pelo ID
         $tipo = Tipo::find($id);
 
         if (!$tipo) {
             return response()->json(['message' => 'Tipo não encontrada'], 404);
+        }
+
+        // Verifica se existem tarefas relacionados
+        if ($tipo->tarefas()->exists()) {
+            return response()->json(['message' => 'Remova as dependencias'], 422);
         }
 
         // Deleta a Tipo
